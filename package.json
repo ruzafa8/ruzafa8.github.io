@@ -14,7 +14,7 @@
   },
   "scripts": {
     "predeploy": "npm run build && echo 'ruzafa.me' > ./build/CNAME",
-    "deploy": "gh-pages -d build -b master",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
