@@ -27,9 +27,9 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-    - run: echo ${CUSTOM_DOMAIN} > ./build/CNAME
+    #- run: echo ${CUSTOM_DOMAIN} > ./build/CNAME
     - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
     - run: npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  CUSTOM_DOMAIN: ruzafa.me 
+  # CUSTOM_DOMAIN: ruzafa.me 
