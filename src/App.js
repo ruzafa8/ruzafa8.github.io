@@ -1,7 +1,5 @@
 import './App.css'
-import { useTranslation } from 'react-i18next'
 import { Trans } from 'react-i18next'
-import List from './components/article/List.tsx'
 import Writer from './components/writer/writer.tsx'
 
 const ITEMS = [
@@ -11,7 +9,7 @@ const ITEMS = [
 ]
 
 function App() {
-  const { t } = useTranslation()
+  // const { t } = useTranslation()
   return (
     <div className="App bg-animation">
       <div id="stars"></div>
