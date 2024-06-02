@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   color: white;
+  min-height: calc(100vh);
 }
 
 .App-header {
