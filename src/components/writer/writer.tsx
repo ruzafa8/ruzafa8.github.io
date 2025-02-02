@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components'
 
 interface IWriter {
   items: string[]
+  velocity?: number
 }
 
 const cursorBlink = keyframes`
@@ -20,7 +21,7 @@ const Typewrite = styled.span`
   animation: ${cursorBlink} 500ms steps(44) infinite;
 `
 
-const Writer = ({ items }: IWriter) => {
+const Writer = ({ items, velocity }: IWriter) => {
   const
     [tick, setTick] = useState(false),
     [repeat, setRepeat] = useState(true),
@@ -59,36 +60,28 @@ const Writer = ({ items }: IWriter) => {
       setWrite(false)
     }
     // add all "html <tags>" in one go
-    console.log('text[text.length]', items[currentWord][text.length])
     if (items[currentWord][text.length] === '<') {
       const endOfTag = items[currentWord].indexOf('>', text.length)
-      console.log('endOfTag', endOfTag)
       setText(text => text + items[currentWord].substring(text.length, endOfTag))
     } else
       setText(text => items[currentWord].substring(0, text.length + 1))
-    new Promise(resolve => setTimeout(resolve, 200 - Math.random() * 100))
+    new Promise(resolve => setTimeout(resolve, 200 - Math.random() * 100 * (velocity ?? 1)))
       .then(() => repeat && setTick(tick =>! tick))
   }
 
-  const timerFn = () => {
-    if (write) {
-      addText()
-    } else {
-      deleteText()
-    }
-  }
+  const timerFn = () => (write ? addText : deleteText)()
 
   useEffect(() => {
     const timer = setTimeout(timerFn)
     return () => clearTimeout(timer)
   }, [tick])
 
-  
+
   return (
     <div>
       <Typewrite className='typewrite' dangerouslySetInnerHTML={{__html: text}}></Typewrite>
     </div>
-  );
+  )
 }
 
-export default Writer;
+export default Writer

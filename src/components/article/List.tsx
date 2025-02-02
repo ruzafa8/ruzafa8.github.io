@@ -10,7 +10,7 @@ const numPages = Math.ceil(list.length / PAGE_SIZE)
 
 const List = (): JSX.Element => {
   const [page, setPage] = useState(0)
-  const [myList, setMyList] = useState([])
+  const [myList, setMyList] = useState<Array<IItem>>([])
 
   useEffect(() => {
     setMyList(getPage(page))
@@ -18,9 +18,7 @@ const List = (): JSX.Element => {
 
   return (
     <div>
-    {
-      myList.map((item: IItem, i: number) => <Item key={i} {...item} />)
-    }
+    { myList.map((item: IItem, i: number) => <Item key={i} {...item} />) }
     <button onClick={() => setPage(page - 1)} disabled={page === 0} >Previous</button>
     <button onClick={() => setPage(page + 1)} disabled={page === numPages - 1}>Next</button>
     </div>
